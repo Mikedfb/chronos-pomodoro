@@ -5,18 +5,18 @@ import { DefaultInput } from '../DefaultInput';
 
 export function MainForm() {
   return (
-    <form className='form'>
+    <form className='form' action=''>
       <div className='formRow'>
         <DefaultInput
-          labelText='Task'
+          labelText='task'
           id='meuInput'
           type='text'
-          placeholder='Digte aqui'
+          placeholder='Digite algo'
         />
       </div>
 
       <div className='formRow'>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Próximo intervalo é de 25min</p>
       </div>
 
       <div className='formRow'>
