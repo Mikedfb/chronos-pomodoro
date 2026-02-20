@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 type ContainerProps = {
-  readonly children: React.ReactNode;
+  children: React.ReactNode;
 };
 
 export function Container({ children }: ContainerProps) {

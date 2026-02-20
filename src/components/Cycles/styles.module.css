@@ -1,9 +1,9 @@
 .cycles {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
   align-items: center;
   justify-content: center;
+  gap: 1.6rem;
 }
 
 .cycleDots {
@@ -19,13 +19,13 @@
 }
 
 .workTime {
-  background-color: var(--warning);
+  background: var(--warning);
 }
 
 .shortBreakTime {
-  background-color: var(--primary);
+  background: var(--primary);
 }
 
 .longBreakTime {
-  background-color: var(--info);
+  background: var(--info);
 }

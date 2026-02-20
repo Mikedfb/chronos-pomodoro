@@ -11,8 +11,8 @@ import { getTaskStatus } from '../../utils/getTaskStatus';
 import { sortTasks } from '../../utils/sortTasks';
 import type { SortTasksOptions } from '../../utils/sortTasks';
 import { useEffect, useState } from 'react';
-import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 import { showMessage } from '../../adapters/showMessage';
+import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 
 export function History() {
   const { state, dispatch } = useTaskContext();
@@ -39,10 +39,6 @@ export function History() {
       }),
     }));
   }, [state.tasks]);
-
-  useEffect(() => {
-    document.title = 'Histórico  - Chronos Pomodoro';
-  }, []);
 
   useEffect(() => {
     if (!confirmClearHistory) return;

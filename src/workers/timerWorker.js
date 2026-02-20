@@ -1,6 +1,6 @@
 let isRunning = false;
 
-self.onmessage = function (event) {
+globalThis.onmessage = function (event) {
   if (isRunning) return;
 
   isRunning = true;

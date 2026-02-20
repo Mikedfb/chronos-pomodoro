@@ -6,18 +6,17 @@ import styles from './styles.module.css';
 export function Cycles() {
   const { state } = useTaskContext();
 
-  // const cycleStep = Array(5).fill(null);
   const cycleStep = Array.from({ length: state.currentCycle });
 
   const cycleDescriptionMap = {
     workTime: 'foco',
-    shortBreakTime: 'descanso curto',
+    shortBreakTime: 'decanso curto',
     longBreakTime: 'descanso longo',
   };
 
   return (
     <div className={styles.cycles}>
-      <span>Ciclos: </span>
+      <span>Ciclos:</span>
 
       <div className={styles.cycleDots}>
         {cycleStep.map((_, index) => {
