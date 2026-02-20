@@ -11,8 +11,10 @@ export function DefaultButton({
   ...props
 }: DefaultButtonProps) {
   return (
-    <button className={`${styles.button} ${styles[color]}`} {...props}>
-      {icon}
-    </button>
+    <>
+      <button className={`${styles.button} ${styles[color]}`} {...props}>
+        {icon}
+      </button>
+    </>
   );
 }

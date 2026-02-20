@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 type GenericHtmlProps = {
-  readonly children: React.ReactNode;
+  children: React.ReactNode;
 };
 
 export function GenericHtml({ children }: GenericHtmlProps) {

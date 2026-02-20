@@ -8,38 +8,44 @@
 import type { TaskModel } from '../../models/TaskModel';
 import type { TaskStateModel } from '../../models/TaskStateModel';
 
-export enum TaskActionTypes {
-  START_TASK = 'START_TASK',
-  INTERRUPT_TASK = 'INTERRUPT_TASK',
-  RESET_STATE = 'RESET_STATE',
-  COUNT_DOWN = 'COUNT_DOWN',
-  COMPLETE_TASK = 'COMPLETE_TASK',
-  CHANGE_SETTINGS = 'CHANGE_SETTINGS',
-}
+// 1. Troque 'enum' por um objeto 'as const'
+export const TaskActionTypes = {
+  START_TASK: 'START_TASK',
+  INTERRUPT_TASK: 'INTERRUPT_TASK',
+  RESET_STATE: 'RESET_STATE',
+  COUNT_DOWN: 'COUNT_DOWN',
+  COMPLETE_TASK: 'COMPLETE_TASK',
+  CHANGE_SETTINGS: 'CHANGE_SETTINGS',
+} as const;
 
+// 2. Crie um tipo baseado nos valores do objeto (opcional, mas útil)
+export type TaskActionTypes =
+  (typeof TaskActionTypes)[keyof typeof TaskActionTypes];
+
+// 3. Atualize as tipagens das Actions
 export type TaskActionsWithPayload =
   | {
-      type: TaskActionTypes.START_TASK;
+      type: typeof TaskActionTypes.START_TASK; // Use 'typeof' aqui
       payload: TaskModel;
     }
   | {
-      type: TaskActionTypes.COUNT_DOWN;
+      type: typeof TaskActionTypes.COUNT_DOWN;
       payload: { secondsRemaining: number };
     }
   | {
-      type: TaskActionTypes.CHANGE_SETTINGS;
+      type: typeof TaskActionTypes.CHANGE_SETTINGS;
       payload: TaskStateModel['config'];
     };
 
 export type TaskActionsWithoutPayload =
   | {
-      type: TaskActionTypes.RESET_STATE;
+      type: typeof TaskActionTypes.RESET_STATE;
     }
   | {
-      type: TaskActionTypes.INTERRUPT_TASK;
+      type: typeof TaskActionTypes.INTERRUPT_TASK;
     }
   | {
-      type: TaskActionTypes.COMPLETE_TASK;
+      type: typeof TaskActionTypes.COMPLETE_TASK;
     };
 
 export type TaskActionModel =
