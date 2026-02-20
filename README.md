@@ -1,73 +1,80 @@
-# React + TypeScript + Vite
+# Chronos Pomodoro 🍅
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Chronos Pomodoro é um aplicativo web para gerenciamento de tarefas e ciclos de
+produtividade baseado na Técnica Pomodoro, desenvolvido com React, TypeScript e
+Vite.
 
-Currently, two official plugins are available:
+## ✨ Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Cronômetro Pomodoro com ciclos de foco, descanso curto e descanso longo
+- Personalização dos tempos de cada ciclo nas configurações
+- Histórico automático de tarefas, com status de completas ou interrompidas
+- Visualização dos ciclos com indicadores coloridos
+- Notificações e mensagens para facilitar o uso
+- Interface moderna e responsiva
 
-## React Compiler
+## 🚀 Diferenciais
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- Ciclos organizados em sequência, com sugestão automática do próximo ciclo
+- Histórico detalhado para acompanhar sua evolução
+- Configuração flexível dos tempos de foco e descanso
+- Visual intuitivo dos ciclos (foco, descanso curto, descanso longo)
 
-## Expanding the ESLint configuration
+## 📚 Sobre a Técnica Pomodoro
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+A Técnica Pomodoro consiste em dividir o trabalho em blocos de tempo (Pomodoros)
+intercalados com pausas. O objetivo é manter o foco total por um período curto e
+garantir descansos para evitar o cansaço mental.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+No Chronos Pomodoro, você pode personalizar os tempos e acompanhar seu progresso
+de forma automática.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🖥️ Tecnologias Utilizadas
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- [React](https://react.dev/) 19
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Lucide React](https://lucide.dev/) (ícones)
+- [React Router](https://reactrouter.com/)
+- [React Toastify](https://fkhadra.github.io/react-toastify/)
+- [date-fns](https://date-fns.org/) (manipulação de datas)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📦 Instalação
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/chronos-pomodoro.git
+   ```
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+3. Rode o projeto em modo desenvolvimento:
+   ```bash
+   npm run dev
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🔧 Configuração
+
+Acesse a página de configurações para ajustar os tempos de foco, descanso curto
+e descanso longo conforme sua preferência.
+
+## 🏁 Uso
+
+- Defina o nome da tarefa e inicie o cronômetro
+- Acompanhe os ciclos e siga as dicas exibidas
+- Veja seu histórico de tarefas e ciclos
+- Personalize os tempos conforme sua rotina
+
+## 📊 Histórico
+
+Todas as tarefas e ciclos concluídos ficam salvos no histórico, permitindo
+acompanhar sua evolução ao longo do tempo.
+
+## 📄 Licença
+
+Este projeto é open source sob a licença MIT.
+
+---
+
+> "Foco total, sem pressa, sem pausa, só vai!" 💪🧘‍♂️
