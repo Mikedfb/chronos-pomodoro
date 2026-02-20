@@ -10,43 +10,28 @@ import { formatDate } from '../../utils/formatDate';
 import { getTaskStatus } from '../../utils/getTaskStatus';
 import { sortTasks } from '../../utils/sortTasks';
 import type { SortTasksOptions } from '../../utils/sortTasks';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { showMessage } from '../../adapters/showMessage';
 import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 
 export function History() {
   const { state, dispatch } = useTaskContext();
-  const [confirmClearHistory, setConfirmClearHistory] = useState(false);
   const hasTasks = state.tasks.length > 0;
 
-  const [sortTasksOptions, setSortTaskOptions] = useState<SortTasksOptions>(
-    () => {
-      return {
-        tasks: sortTasks({ tasks: state.tasks }),
-        field: 'startDate',
-        direction: 'desc',
-      };
-    },
-  );
+  const [sortOptions, setSortOptions] = useState<
+    Omit<SortTasksOptions, 'tasks'>
+  >({
+    field: 'startDate',
+    direction: 'desc',
+  });
 
-  useEffect(() => {
-    setSortTaskOptions(prevState => ({
-      ...prevState,
-      tasks: sortTasks({
-        tasks: state.tasks,
-        direction: prevState.direction,
-        field: prevState.field,
-      }),
-    }));
-  }, [state.tasks]);
-
-  useEffect(() => {
-    if (!confirmClearHistory) return;
-
-    setConfirmClearHistory(false);
-
-    dispatch({ type: TaskActionTypes.RESET_STATE });
-  }, [confirmClearHistory, dispatch]);
+  const sortedTasks = useMemo(() => {
+    return sortTasks({
+      tasks: state.tasks,
+      field: sortOptions.field,
+      direction: sortOptions.direction,
+    });
+  }, [state.tasks, sortOptions]);
 
   useEffect(() => {
     return () => {
@@ -55,31 +40,34 @@ export function History() {
   }, []);
 
   function handleSortTasks({ field }: Pick<SortTasksOptions, 'field'>) {
-    const newDirection = sortTasksOptions.direction === 'desc' ? 'asc' : 'desc';
-
-    setSortTaskOptions({
-      tasks: sortTasks({
-        direction: newDirection,
-        tasks: sortTasksOptions.tasks,
-        field,
-      }),
-      direction: newDirection,
+    setSortOptions(prev => ({
       field,
-    });
+      direction: prev.direction === 'desc' ? 'asc' : 'desc',
+    }));
   }
 
   function handleResetHistory() {
     showMessage.dismiss();
+
     showMessage.confirm('Tem certeza?', confirmation => {
-      setConfirmClearHistory(confirmation);
+      if (!confirmation) return;
+
+      dispatch({ type: TaskActionTypes.RESET_STATE });
     });
   }
+
+  const taskTypeDictionary = {
+    workTime: 'Foco',
+    shortBreakTime: 'Descanso curto',
+    longBreakTime: 'Descanso longo',
+  };
 
   return (
     <MainTemplate>
       <Container>
         <Heading>
           <span>History</span>
+
           {hasTasks && (
             <span className={styles.buttonContainer}>
               <DefaultButton
@@ -106,41 +94,36 @@ export function History() {
                   >
                     Tarefa ↕
                   </th>
+
                   <th
                     onClick={() => handleSortTasks({ field: 'duration' })}
                     className={styles.thSort}
                   >
                     Duração ↕
                   </th>
+
                   <th
                     onClick={() => handleSortTasks({ field: 'startDate' })}
                     className={styles.thSort}
                   >
                     Data ↕
                   </th>
+
                   <th>Status</th>
                   <th>Tipo</th>
                 </tr>
               </thead>
 
               <tbody>
-                {sortTasksOptions.tasks.map(task => {
-                  const taskTypeDictionary = {
-                    workTime: 'Foco',
-                    shortBreakTime: 'Descanso curto',
-                    longBreakTime: 'Descanso longo',
-                  };
-
-                  return (
-                    <tr key={task.id}>
-                      <td>{task.name}</td>
-                      <td>{task.duration}min</td>
-                      <td>{formatDate(task.startDate)}</td>
-                      <td>{getTaskStatus(task, state.activeTask)}</td>
-                      <td>{taskTypeDictionary[task.type]}</td>
-                    </tr>
-                  );
-                })}
+                {sortedTasks.map(task => (
+                  <tr key={task.id}>
+                    <td>{task.name}</td>
+                    <td>{task.duration}min</td>
+                    <td>{formatDate(task.startDate)}</td>
+                    <td>{getTaskStatus(task, state.activeTask)}</td>
+                    <td>{taskTypeDictionary[task.type]}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
