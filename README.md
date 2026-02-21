@@ -1,8 +1,11 @@
 # Chronos Pomodoro 🍅
 
+Link: https://chronos-pomodoro-pied.vercel.app/
+
 Chronos Pomodoro é um aplicativo web para gerenciamento de tarefas e ciclos de
 produtividade baseado na Técnica Pomodoro, desenvolvido com React, TypeScript e
 Vite.
+
 
 ## ✨ Funcionalidades
 
